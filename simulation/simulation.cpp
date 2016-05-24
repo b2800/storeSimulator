@@ -1,9 +1,14 @@
+#include "simulation.hpp"
 
 Simulation::Simulation(){
-	
+
 }
 
-void Simulation::Start(int steps){
+Simulation::~Simulation(){
+	delete generator_;
+}
+
+void Simulation::Start(int steps, int resolution){
 
 	while(steps != 0){
 		Time::Advance();
