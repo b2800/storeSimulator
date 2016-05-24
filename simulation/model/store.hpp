@@ -6,10 +6,12 @@
 
 using namespace std;
 
+
 class Store{
 	public:
 		Store();
 		void Update(float);
+		std::vector<QueueState> GetState();
 
 	private:
 		vector<Queue> queues_;

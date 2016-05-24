@@ -15,10 +15,12 @@ struct QueueState{
 class Queue{
 	public:
 		Queue();
-		void Process(float);
+		void Update(float);
 		QueueState GetState();
 
 	private:
 		QueueState state_;
 		vector<Client> clients_;
-}
+};
+
+#endif

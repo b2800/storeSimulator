@@ -1,15 +1,12 @@
 #ifndef SIMULATION_GENERATOR_HPP
 #define SIMULATION_GENERATOR_HPP
 
-namespace game{
+class Generator{
+	public:
+		Generator();
 
-	class Generator{
-		public:
-			Generator();
-
-		private:
-			// Stuff
-	};
-}
+	private:
+		// Stuff
+};
 
 #endif //SIMULATION_GENERATOR_HPP
