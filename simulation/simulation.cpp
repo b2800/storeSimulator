@@ -1,4 +1,5 @@
 #include "simulation.hpp"
+#include "util/parameters.hpp"
 #include "util/time.hpp"
 #include "util/file.hpp"
 
@@ -8,11 +9,14 @@
 #include <string>
 
 Simulation::Simulation(){
-	string gen = Parameters::Get("Generator");
-	if(gen == "exp"){
-		generator_ = new ExponentialGenerator();
-	} else if (gen == "poisson"){
-		generator_ = new PoissonGenerator();
+	switch(Parameters::Get().model){
+		case Model::POISSON:
+			generator_ = new PoissonModel();
+			break;
+
+		case Model::EXP:
+		default:
+			generator_ = new ExponentialModel();
 	}
 }
 
@@ -20,7 +24,9 @@ Simulation::~Simulation(){
 	delete generator_;
 }
 
-void Simulation::Start();
+void Simulation::Start(){
+
+	int steps = Parameters::Get().steps;
 
 	while(steps != 0){
 		Time::Advance();
@@ -28,7 +34,6 @@ void Simulation::Start();
 		File::Save(store_.GetState());
 		steps--;
 	}
-	File::Flush();
 }
 
 int main(int argc, char** args){

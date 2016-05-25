@@ -15,7 +15,7 @@ class Parameters{
 		static Data Get();
 
 	private:
-		Data data_;
+		static Data data_;
 };
 
 #endif

@@ -6,6 +6,12 @@ Store::Store(){
 
 }
 
+void Store::Update(float delta){
+	for(Queue q : queues_){
+		q.Update(delta);
+	}
+}
+
 vector<QueueState> Store::GetState(){
 	vector<QueueState> full_state;
 	for(Queue q : queues_){
@@ -13,3 +19,4 @@ vector<QueueState> Store::GetState(){
 	}
 	return full_state;
 }
+

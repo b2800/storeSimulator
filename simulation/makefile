@@ -1,6 +1,6 @@
 #### PROJECT SETTINGS ####
 # The name of the executable to be created
-BIN_NAME := game
+BIN_NAME := simulation
 # Compiler used
 CXX ?= g++
 # Extension of source files used in the project
@@ -17,14 +17,10 @@ RCOMPILE_FLAGS = -D NDEBUG
 DCOMPILE_FLAGS = -D DEBUG -D_GLIBCXX_DEBUG
 # Add additional include paths
 INCLUDES = -I $(SRC_PATH)/
-# GLFW link flags
-GLFW_LINK_FLAGS = -lglfw -lpthread
-#OpenGL link flags
-OPENGL_LINK_FLAGS = -lGL -lGLU -lGLEW -DGL_GLEXT_PROTOTYPES
 #Coverage flags for gcov
 COVERAGE_LINK_FLAGS = -lgcov --coverage
 # General linker settings
-LINK_FLAGS = $(GLFW_LINK_FLAGS) $(OPENGL_LINK_FLAGS)
+LINK_FLAGS = 
 # Additional release-specific linker settings
 RLINK_FLAGS =
 # Additional debug-specific linker settings
@@ -35,10 +31,6 @@ BUILD_DIR = ../build
 DESTDIR = /
 # Install path (bin/ is appended automatically)
 INSTALL_PREFIX = usr/local
-# Main entry point
-MAIN_ENTRY_POINT = $(SRC_PATH)/core/main.cpp
-# Tests entry point
-TEST_PATH = $(SRC_PATH)/test/*
 #### END PROJECT SETTINGS ####
 
 # Generally should not need to edit below this line
@@ -71,20 +63,15 @@ test: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(RLINK_FLAGS) $(COVERAGE_LINK_
 # Build and output paths
 release: export BUILD_PATH := $(BUILD_DIR)/release
 release: export BIN_PATH := $(BUILD_DIR)/bin/release
-release: export EXCLUDED_ENTRY_POINT = $(TEST_PATH)
 debug: export BUILD_PATH := $(BUILD_DIR)/debug
 debug: export BIN_PATH := $(BUILD_DIR)/bin/debug
-debug: export EXCLUDED_ENTRY_POINT = $(TEST_PATH)
 test: export BUILD_PATH := $(BUILD_DIR)/test
 test: export BIN_PATH := $(BUILD_DIR)/bin/test
-test: export EXCLUDED_ENTRY_POINT = $(MAIN_ENTRY_POINT)
 install: export BIN_PATH := $(BUILD_DIR)/bin/release
-print-%: export EXCLUDED_ENTRY_POINT = $(MAIN_ENTRY_POINT)
 
 # Find all source files in the source directory, sorted by most
 # recently modified
 SOURCES = $(shell find $(SRC_PATH)/ -type f -name '*.$(SRC_EXT)' \
-			! -path '$(EXCLUDED_ENTRY_POINT)' \
 			-printf '%T@\t%p\n' | sort -k 1nr | cut -f2-)
 
 # fallback in case the above fails
@@ -106,7 +93,7 @@ START_TIME = date '+%s' > $(TIME_FILE)
 END_TIME = read st < $(TIME_FILE) ; \
 	$(RM) $(TIME_FILE) ; \
 	st=$$((`date '+%s'` - $$st - 86400)) ; \
-	echo `date -u -d @$$st '+%H:%M:%S'` 
+	echo `date -u -d @$$st '+%H:%M:%S'`
 
 # Version macros
 # Comment/remove this section to remove versioning

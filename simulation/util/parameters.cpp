@@ -7,5 +7,13 @@ void Parameters::Parse(int argc, char** argv){
 		data_.model = Model::EXP;
 		data_.resolution = 10;
 		data_.steps = 144;
+		return;
 	}
+
 }
+
+Data Parameters::Get(){
+	return data_;
+}
+
+Data Parameters::data_;

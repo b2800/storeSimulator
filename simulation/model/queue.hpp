@@ -1,7 +1,7 @@
 #ifndef QUEUE_HPP_
 #define QUEUE_HPP_
 
-#include <vector>
+#include <deque>
 #include "client.hpp"
 
 using namespace std;
@@ -20,7 +20,7 @@ class Queue{
 
 	private:
 		QueueState state_;
-		vector<Client> clients_;
+		deque<Client> clients_;
 };
 
 #endif
