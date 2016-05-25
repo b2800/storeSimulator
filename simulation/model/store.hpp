@@ -10,10 +10,13 @@ using namespace std;
 class Store{
 	public:
 		Store();
+		void Initialize();
 		void Update(float);
+		vector<Queue> GetQueuesNearby(int, int);
 		std::vector<QueueState> GetState();
 
 	private:
+		void CreateCheckout();
 		vector<Queue> queues_;
 };
 
