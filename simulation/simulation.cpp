@@ -31,7 +31,7 @@ void Simulation::Start(){
 	while(steps != 0){
 		Time::Advance();
 		store_.Update(Time::GetDelta());
-		File::Save(store_.GetState());
+		File::Save(store_.GetState(), Time::GetCurrentTime());
 		steps--;
 	}
 }

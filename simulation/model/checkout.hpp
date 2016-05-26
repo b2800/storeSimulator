@@ -7,9 +7,13 @@
 using namespace std;
 
 struct CheckoutState{
+	bool open;
 	int current_client_count;
 	int total_unhappy_clients;
 	int total_clients;
+	float average_speed;
+	float maximum_speed;
+	deque<Client> clients;
 };
 
 class Checkout{
@@ -20,7 +24,6 @@ class Checkout{
 
 	private:
 		CheckoutState state_;
-		deque<Client> clients_;
 };
 
 #endif
