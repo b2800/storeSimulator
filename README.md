@@ -10,3 +10,5 @@ at a given precision, and the visualization programs that display those data gra
 + Quentin Remplakowski
 + Gilles Riviere
 
+## External libraries used 
++ [json11](https://github.com/dropbox/json11)
