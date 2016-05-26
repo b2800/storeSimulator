@@ -1,0 +1,84 @@
+{
+   "data":[
+      {
+         "time":"t0",
+         "caisses":[
+            {
+               "name":"c1",
+               "status":"open",
+               "v_moy":"1",
+               "v_max":"3.4",
+               "client_total":"3",
+               "happy_client":"1",
+               "unhappy_client":"1",
+			   "clients": [
+					{"status":"happy",
+					 "theta_s":"10"},
+					{"status": "neutral",
+					 "theta_s": "15"},
+					{"status": "unhappy",
+					 "theta_s": "1"}
+				]
+            },
+            {
+               "name":"c2",
+               "status":"open",
+               "v_moy":"0.4",
+               "v_max":"2.4",
+               "client_total":"4",
+               "happy_client":"2",
+               "unhappy_client":"2",
+			   "clients": [
+					{"status":"happy",
+					 "theta_s":"10"},
+					{"status":"happy",
+					 "theta_s":"8"},
+					{"status": "unhappy",
+					 "theta_s": "3"},
+					{"status": "unhappy",
+					 "theta_s": "1"}
+				]
+            }
+         ]
+      },
+      {
+         "time":"t1",
+         "caisses":[
+            {
+               "name":"c1",
+               "status":"open",
+               "v_moy":"1.5",
+               "v_max":"3.4",
+               "client_total":"1",
+               "happy_client":"1",
+               "unhappy_client":"0",
+			   "clients": [
+					{"status":"happy",
+					 "theta_s":"10"}
+				]
+            },
+            {
+               "name":"c2",
+               "status":"open",
+               "v_moy":"0.9",
+               "v_max":"2.4",
+               "client_total":"5",
+               "happy_client":"2",
+               "unhappy_client":"1",
+			   "clients": [
+					{"status":"happy",
+					 "theta_s":"10"},
+					{"status": "neutral",
+					 "theta_s": "15"},
+					{"status": "happy",
+					 "theta_s": "1"},
+					{"status": "neutral",
+					 "theta_s": "15"},
+					{"status": "unhappy",
+					 "theta_s": "1"}
+				]
+            }
+         ]
+      }
+   ]
+}
