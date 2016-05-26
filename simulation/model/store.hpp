@@ -2,22 +2,23 @@
 #define STORE_HPP_
 
 #include <vector>
-#include "queue.hpp"
+#include "checkout.hpp"
 
 using namespace std;
-
 
 class Store{
 	public:
 		Store();
 		void Initialize();
 		void Update(float);
-		vector<Queue> GetQueuesNearby(int, int);
-		std::vector<QueueState> GetState();
+		vector<Checkout> GetCheckoutsNearby(int, int);
+		std::vector<CheckoutState> GetState();
 
 	private:
 		void CreateCheckout();
-		vector<Queue> queues_;
+		void OpenCheckout();
+		void CloseCheckout(int);
+		vector<Checkout> checkouts_;
 };
 
-#endif STORE_HPP_
+#endif //STORE_HPP_

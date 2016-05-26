@@ -1,4 +1,5 @@
 #include "file.hpp"
+#include "../deps/json.hpp"
 
 using namespace std;
 
@@ -6,9 +7,9 @@ void File::Initialize(){
 
 }
 
-void File::Save(vector<QueueState> state_list){
-	for(QueueState state : state_list){
-
+void File::Save(vector<CheckoutState> state_list){
+	for(CheckoutState state : state_list){
+		
 	}
 }
 

@@ -1,25 +1,25 @@
-#ifndef QUEUE_HPP_
-#define QUEUE_HPP_
+#ifndef CHECKOUT_HPP_
+#define CHECKOUT_HPP_
 
 #include <deque>
 #include "client.hpp"
 
 using namespace std;
 
-struct QueueState{
+struct CheckoutState{
 	int current_client_count;
 	int total_unhappy_clients;
 	int total_clients;
 };
 
-class Queue{
+class Checkout{
 	public:
-		Queue();
+		Checkout();
 		void Update(float);
-		QueueState GetState();
+		CheckoutState GetState();
 
 	private:
-		QueueState state_;
+		CheckoutState state_;
 		deque<Client> clients_;
 };
 

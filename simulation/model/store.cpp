@@ -15,27 +15,32 @@ void Store::Initialize(){
 }
 
 void Store::Update(float delta){
-	for(Queue q : queues_){
+	for(Checkout q : checkouts_){
 		q.Update(delta);
 	}
 }
 
-vector<QueueState> Store::GetState(){
-	vector<QueueState> full_state;
-	for(Queue q : queues_){
+void Store::CreateCheckout(){
+	Checkout c;
+	checkouts_.push_back(c);
+}
+
+vector<CheckoutState> Store::GetState(){
+	vector<CheckoutState> full_state;
+	for(Checkout q : checkouts_){
 		full_state.push_back(q.GetState());
 	}
 	return full_state;
 }
 
-vector<Queue> Store::GetQueuesNearby(int position, int amount){
-	vector<Queue> result;
+vector<Checkout> Store::GetCheckoutsNearby(int position, int amount){
+	vector<Checkout> result;
 	int start = position - (amount/2);
 	int end = start + amount;
-	int max = queues_.size();
+	int max = checkouts_.size();
 	for(int i = start; i < end; i++){
 		if(i < 0 || i >= max){ continue; }
-		result.push_back(queues_[i]);
+		result.push_back(checkouts_[i]);
 	}
 	return result;
 }

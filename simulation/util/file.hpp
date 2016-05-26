@@ -3,14 +3,14 @@
 
 #include <vector>
 #include <string>
-#include "../model/queue.hpp"
+#include "../model/checkout.hpp"
 
 using namespace std;
 
 class File{
 	public:
 		static void Initialize();
-		static void Save(vector<QueueState>);
+		static void Save(vector<CheckoutState>);
 
 	private:
 		static string path_;

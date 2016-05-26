@@ -25,7 +25,7 @@ Simulation::~Simulation(){
 }
 
 void Simulation::Start(){
-	store.Initialize();
+	store_.Initialize();
 	int steps = Parameters::Get().steps;
 
 	while(steps != 0){
