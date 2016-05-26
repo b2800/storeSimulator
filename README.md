@@ -11,4 +11,4 @@ at a given precision, and the visualization programs that display those data gra
 + Gilles Riviere
 
 ## External libraries used 
-+ [json11](https://github.com/dropbox/json11)
++ [JSON library](https://github.com/nlohmann/json)
