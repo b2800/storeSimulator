@@ -7,14 +7,17 @@ void Parameters::Parse(int argc, char** argv){
 		LoadDefault();
 		return;
 	}
-
+	LoadDefault(); //remplace this with proper parsing
 }
 
 void Parameters::LoadDefault(){
-	data_.model = Model::EXP;
-	data_.resolution = 10;
-	data_.steps = 144;
+	data_.distribution = Distribution::EXP;
+	data_.resolution = 2;
+	data_.total_duration = 120;
 	data_.checkout_count = 5;
+	data_.output_file = "results.json";
+	data_.lambda = 4;
+	data_.mu = 10;
 }
 
 Data Parameters::Get(){

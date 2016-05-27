@@ -1,13 +1,18 @@
 #ifndef SIMULATION_PARAMETERS_
 #define SIMULATION_PARAMETERS_
 
-enum class Model{EXP, POISSON};
+#include <string>
+
+enum class Distribution{EXP, POISSON};
 
 struct Data{
-	Model model;
-	int steps;
+	Distribution distribution;
 	int resolution;
+	int total_duration;
 	int checkout_count;
+	float lambda; //parameter for wait between clients
+	float mu;	//parameter for client processing time
+	std::string output_file;
 };
 
 class Parameters{

@@ -1,10 +1,13 @@
+#include <fstream>
 #include "file.hpp"
+#include "parameters.hpp"
 #include "../deps/json.hpp"
 
 using namespace std;
 using json = nlohmann::json;
 
 void File::Initialize(){
+	path_ = Parameters::Get().output_file;
 	full_state_["data"] = {};
 }
 
@@ -20,13 +23,31 @@ void File::Save(vector<CheckoutState> state_list, int time){
 		cs["max_speed"] = state.maximum_speed;
 		cs["total_clients"] = state.clients.size();
 		cs["clients"] = {};
-		for(Client c : state.clients){
-		
+		for(Client client : state.clients){
+			json c;
+			switch(client.GetMood()){
+				case Mood::HAPPY:
+					c["status"] = "happy";
+					break;
+				case Mood::UNHAPPY:
+					c["status"] = "unhappy";
+					break;
+				case Mood::NEUTRAL:
+				default:
+					c["status"] = "neutral";
+			}
+			c["theta_s"] = client.GetThetaS();
 		}
-
 		snap["checkouts"].push_back(cs);
 	}
 	full_state_["data"].push_back(snap);
+}
+
+void File::Flush(){
+	std::ofstream file(path_);
+	file << full_state_.dump() << std::endl;
+	full_state_ = json();
+	file.close();
 }
 
 string File::path_;

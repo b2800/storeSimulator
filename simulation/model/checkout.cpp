@@ -1,3 +1,4 @@
+#include <iostream>
 #include "checkout.hpp"
 
 using namespace std;

@@ -3,37 +3,27 @@
 #include "util/time.hpp"
 #include "util/file.hpp"
 
-#include "generator/exp.hpp"
-#include "generator/poisson.hpp"
-
 #include <string>
 
 Simulation::Simulation(){
-	switch(Parameters::Get().model){
-		case Model::POISSON:
-			generator_ = new PoissonModel();
-			break;
-
-		case Model::EXP:
-		default:
-			generator_ = new ExponentialModel();
-	}
 }
 
 Simulation::~Simulation(){
-	delete generator_;
+
 }
 
 void Simulation::Start(){
 	store_.Initialize();
-	int steps = Parameters::Get().steps;
 
-	while(steps != 0){
+	Data data = Parameters::Get();
+	int steps = data.total_duration / data.resolution;
+	while(steps > 0){
 		Time::Advance();
 		store_.Update(Time::GetDelta());
 		File::Save(store_.GetState(), Time::GetCurrentTime());
 		steps--;
 	}
+	File::Flush();
 }
 
 int main(int argc, char** args){

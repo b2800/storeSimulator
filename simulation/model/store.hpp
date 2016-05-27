@@ -11,14 +11,17 @@ class Store{
 		Store();
 		void Initialize();
 		void Update(float);
-		vector<Checkout> GetCheckoutsNearby(int, int);
+		vector<Checkout*> GetCheckoutsNearby(int, int);
 		std::vector<CheckoutState> GetState();
 
 	private:
 		void CreateCheckout();
 		void OpenCheckout();
 		void CloseCheckout(int);
+		void UpdateTimer(float delta);
+		void SendNewClientToCheckouts();
 		vector<Checkout> checkouts_;
+		float timer_;
 };
 
 #endif //STORE_HPP_
