@@ -20,10 +20,13 @@ class Checkout{
 	public:
 		Checkout();
 		void Update(float);
+		void AddClient(Client);
 		CheckoutState GetState();
 
 	private:
 		CheckoutState state_;
+		float timer_;
+		Client* current_client;
 };
 
 #endif

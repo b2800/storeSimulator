@@ -4,7 +4,6 @@
 void Random::Initialize(){
 	Data params = Parameters::Get();
 	dist_ = params.distribution;
-	uniform_distribution_ = std::uniform_int_distribution<int>(params.checkout_count);
 }
 
 int Random::NextVariableInt(float param){
@@ -19,11 +18,11 @@ int Random::NextVariableInt(float param){
 	}
 }
 
-int Random::NextUniformInt(){
-	return uniform_distribution_(generator_);
+int Random::NextUniformInt(int param){
+	std::uniform_int_distribution<int> dist = std::uniform_int_distribution<int>(0, param);
+	return dist(generator_);
 }
 
 
 std::default_random_engine Random::generator_;
-std::uniform_int_distribution<int> Random::uniform_distribution_;
 Distribution Random::dist_;

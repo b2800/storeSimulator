@@ -19,6 +19,10 @@ class Client{
 		void Update();
 
 	private:
+		void ChooseRandomly(vector<Checkout*>);
+		void ChooseLessFull(vector<Checkout*>);
+		void ChooseFromThetaSApproximation(vector<Checkout*>);
+
 		int position_;
 		float theta_s_;
 		Mood mood_;

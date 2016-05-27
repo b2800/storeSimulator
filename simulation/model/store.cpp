@@ -6,7 +6,7 @@
 using namespace std;
 
 Store::Store(){
-
+	timer_ = 0;
 }
 
 void Store::Initialize(){
@@ -33,7 +33,7 @@ void Store::UpdateTimer(float delta){
 }
 
 void Store::SendNewClientToCheckouts(){
-	int pos = Random::NextUniformInt();
+	int pos = Random::NextUniformInt(Parameters::Get().checkout_count);
 	int theta_s = Random::NextVariableInt(Parameters::Get().mu);
 	Client c(pos, theta_s);
 	c.PickCheckout(GetCheckoutsNearby(pos, 3));
@@ -57,6 +57,7 @@ vector<Checkout*> Store::GetCheckoutsNearby(int position, int amount){
 	int start = position - (amount/2);
 	int end = start + amount;
 	int max = checkouts_.size();
+
 	for(int i = start; i < end; i++){
 		if(i < 0 || i >= max){ continue; }
 		result.push_back(&(checkouts_[i]));

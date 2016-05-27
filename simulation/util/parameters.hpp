@@ -4,6 +4,7 @@
 #include <string>
 
 enum class Distribution{EXP, POISSON};
+enum class Method{RANDOM, LESS, APPROXIMATION};
 
 struct Data{
 	Distribution distribution;
@@ -12,6 +13,7 @@ struct Data{
 	int checkout_count;
 	float lambda; //parameter for wait between clients
 	float mu;	//parameter for client processing time
+	Method checkout_choosing_method;
 	std::string output_file;
 };
 

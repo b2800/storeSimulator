@@ -37,6 +37,7 @@ void File::Save(vector<CheckoutState> state_list, int time){
 					c["status"] = "neutral";
 			}
 			c["theta_s"] = client.GetThetaS();
+			cs["clients"].push_back(c);
 		}
 		snap["checkouts"].push_back(cs);
 	}
