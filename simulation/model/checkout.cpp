@@ -9,23 +9,41 @@ Checkout::Checkout(){
 }
 
 void Checkout::Update(float delta){
+	std::cout << "begin update, client count " << clients_.size() << std::endl;;
 	if(!current_client){
-		if(state_.clients.size() == 0){ return; }
-		current_client = &(state_.clients.front());
+		if(clients_.empty()){ return; }
+		current_client = &(clients_.front());
 	}
 
 	timer_ -= delta;
-	if(timer_ > 0){ return; }
+	while(timer_ <= 0){
+		current_client = nullptr;
+		clients_.erase( clients_.begin() );
+		std::cout << "popping client, new size : " << clients_.size() << std::endl;
+		if(clients_.empty()){
+			timer_ = 0;
+			current_client = nullptr;
+			return;
+		} else {
+			current_client = &(clients_.front());
+			timer_ += current_client->GetThetaS();
+		}
+	}
 
-	current_client = nullptr;
-	state_.clients.pop_front();
+	std::cout << "update end, client count : " << clients_.size() << std::endl;
 }
 
 void Checkout::AddClient(Client c){
-	state_.clients.push_back(c);
+	std::cout << "new client added " << std::endl;
+	clients_.push_back(c);
 }
 
 CheckoutState Checkout::GetState(){
-	return state_;
+	CheckoutState s;
+
+	s.clients = clients_;
+	s.open = true;
+	s.total_clients = clients_.size();
+	return s;
 }
 

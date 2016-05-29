@@ -1,7 +1,7 @@
 #ifndef CHECKOUT_HPP_
 #define CHECKOUT_HPP_
 
-#include <deque>
+#include <vector>
 #include "client.hpp"
 
 using namespace std;
@@ -13,7 +13,7 @@ struct CheckoutState{
 	int total_clients;
 	float average_speed;
 	float maximum_speed;
-	deque<Client> clients;
+	vector<Client> clients;
 };
 
 class Checkout{
@@ -24,9 +24,9 @@ class Checkout{
 		CheckoutState GetState();
 
 	private:
-		CheckoutState state_;
 		float timer_;
 		Client* current_client;
+		vector<Client> clients_;
 };
 
 #endif

@@ -11,7 +11,6 @@ class Time{
 	private:
 		static float delta_;
 		static float current_time_;
-		static float resolution_;
 };
 
 #endif //TIME_HPP_

@@ -7,7 +7,7 @@
 class Random{
 	public:
 		static void Initialize();
-		static int NextVariableInt(float);
+		static float NextVariableFloat(float);
 		static int NextUniformInt(int);
 		static int GetClientProcessingTime();
 

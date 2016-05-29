@@ -19,26 +19,38 @@ float Client::GetThetaS(){
 }
 
 void Client::PickCheckout(vector<Checkout*> available_checkouts){
+	if(available_checkouts.empty()){ return; }
+
+	Checkout* choosen_checkout = nullptr;
 	switch(Parameters::Get().checkout_choosing_method){
 		case Method::LESS:
-			ChooseLessFull(available_checkouts);
+			choosen_checkout = GetLessFull(available_checkouts);
 			break;
 		case Method::APPROXIMATION:
-			ChooseFromThetaSApproximation(available_checkouts);
+			choosen_checkout = GetByThetaSApproximation(available_checkouts);
 			break;
 		case Method::RANDOM:
 		default:
-			ChooseRandomly(available_checkouts);
+			choosen_checkout = GetRandom(available_checkouts);
 	}
+
+	// Mood modifier
+	int size = choosen_checkout->GetState().clients.size();
+	if(size == 0){	// Default to happy when client don't have to wait;
+		mood_ = Mood::HAPPY;
+	} else if (size >= 5){
+		mood_ = Mood::UNHAPPY;
+	}
+
+	choosen_checkout->AddClient(*this);
 }
 
-void Client::ChooseRandomly(vector<Checkout*> available_checkouts){
+Checkout* Client::GetRandom(vector<Checkout*> available_checkouts){
 	int random = Random::NextUniformInt(available_checkouts.size()-1);
-	available_checkouts[random]->AddClient(*this);
+	return available_checkouts[random];
 }
 
-void Client::ChooseLessFull(vector<Checkout*> available_checkouts){
-	if(available_checkouts.empty()){ return; }
+Checkout* Client::GetLessFull(vector<Checkout*> available_checkouts){
 	int size = available_checkouts[0]->GetState().clients.size();
 	int id = 0;
 
@@ -49,9 +61,9 @@ void Client::ChooseLessFull(vector<Checkout*> available_checkouts){
 			id = i;
 		}
 	}
-	available_checkouts[id]->AddClient(*this);
+	return available_checkouts[id];
 }
 
-void Client::ChooseFromThetaSApproximation(vector<Checkout*> available_checkouts){
-	ChooseLessFull(available_checkouts); //TODO : Change this
+Checkout* Client::GetByThetaSApproximation(vector<Checkout*> available_checkouts){
+	return GetLessFull(available_checkouts); //TODO : Change this
 }

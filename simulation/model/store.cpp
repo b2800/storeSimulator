@@ -18,23 +18,28 @@ void Store::Initialize(){
 
 void Store::Update(float delta){
 	UpdateTimer(delta);
+	int i = 0;
 	for(Checkout q : checkouts_){
+		std::cout << "Updated checkout " << i << std::endl;
 		q.Update(delta);
+		i++;
 	}
 }
 
 void Store::UpdateTimer(float delta){
 	timer_ -= delta;
-	if(timer_ > 0){ return; }
 
-	SendNewClientToCheckouts();
-	int new_timer = Random::NextVariableInt(Parameters::Get().lambda);
-	timer_ += new_timer; // Take in account case when timer is smaller than simulation resolution
+	while(timer_ <= 0){
+		SendNewClientToCheckouts();
+		float new_timer = Random::NextVariableFloat(Parameters::Get().lambda);
+		timer_ += new_timer; // Take in account case when timer is smaller than simulation resolution
+	}
 }
 
 void Store::SendNewClientToCheckouts(){
 	int pos = Random::NextUniformInt(Parameters::Get().checkout_count);
-	int theta_s = Random::NextVariableInt(Parameters::Get().mu);
+	float theta_s = Random::NextVariableFloat(Parameters::Get().mu);
+	std::cout << "new client theta_s " << theta_s << std::endl;
 	Client c(pos, theta_s);
 	c.PickCheckout(GetCheckoutsNearby(pos, 3));
 }

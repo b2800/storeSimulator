@@ -23,22 +23,31 @@ void File::Save(vector<CheckoutState> state_list, int time){
 		cs["max_speed"] = state.maximum_speed;
 		cs["total_clients"] = state.clients.size();
 		cs["clients"] = {};
+		int happy_clients = 0;
+		int neutral_clients = 0;
+		int unhappy_clients = 0;
 		for(Client client : state.clients){
 			json c;
 			switch(client.GetMood()){
 				case Mood::HAPPY:
 					c["status"] = "happy";
+					happy_clients++;
 					break;
 				case Mood::UNHAPPY:
 					c["status"] = "unhappy";
+					unhappy_clients++;
 					break;
 				case Mood::NEUTRAL:
 				default:
 					c["status"] = "neutral";
+					neutral_clients++;
 			}
 			c["theta_s"] = client.GetThetaS();
 			cs["clients"].push_back(c);
 		}
+		cs["happy_clients"] = happy_clients;
+		cs["neutral_clients"] = neutral_clients;
+		cs["unhappy_clients"] = unhappy_clients;
 		snap["checkouts"].push_back(cs);
 	}
 	full_state_["data"].push_back(snap);

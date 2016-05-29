@@ -2,7 +2,7 @@
 #include "parameters.hpp"
 
 void Time::Initialize(){
-	resolution_ = Parameters::Get().resolution;
+	delta_ = Parameters::Get().resolution;
 }
 
 float Time::GetDelta(){
@@ -10,7 +10,7 @@ float Time::GetDelta(){
 }
 
 void Time::Advance(){
-	current_time_ += resolution_;
+	current_time_ += delta_;
 }
 
 float Time::GetCurrentTime(){
@@ -18,5 +18,4 @@ float Time::GetCurrentTime(){
 }
 
 float Time::delta_;
-float Time::resolution_;
 float Time::current_time_;
